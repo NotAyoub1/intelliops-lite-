@@ -1,8 +1,10 @@
 # IntelliOps-Lite
 Groupe : 1
-Mini-plateforme de traitement d'incidents : trois agents (Extraction, Analyse,
-Notification) qui échangent via un contrat commun (src/contrat.py).
+Mini-plateforme de traitement d'incidents : trois agents (Extraction, Analyse,Notification) qui échangent via un contrat commun (src/contrat.py).
+
 ## Équipe
+- EL KHADIRI Ayoub: Agent extraction (A)
+
 intelliops-lite/
 ├── README.md
 ├── .gitignore
