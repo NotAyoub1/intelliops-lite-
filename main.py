@@ -31,11 +31,11 @@ def main():
     ignores = 0
     for numero, (traiter, brut) in enumerate(entrees, start=1):
         resultat = traiter(brut, numero, deja_vus, journal)
-    if resultat is None:
-        ignores += 1
-        print(f"--- EVT-{numero:05d} ignoré (doublon)\n")
-    else:
-        afficher(resultat)
+        if resultat is None:
+            ignores += 1
+            print(f"--- EVT-{numero:05d} ignoré (doublon)\n")
+        else:
+            afficher(resultat)
     print(f"{len(entrees)} événements reçus, {ignores} doublon(s) ignoré(s), "
     f"{len(journal)} notification(s) envoyée(s).")
 
