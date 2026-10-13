@@ -21,5 +21,14 @@ class TestAnalyse(unittest.TestCase):
         self.assertFalse(est_doublon(evt(message="b"), vus))
 
 
+    def test_runbook_trouve_sans_casse(self):
+        e = evt(message="Container oomkilled restarts=3")
+        self.assertEqual(rechercher_runbook(e, RUNBOOKS), RUNBOOKS["OOMKilled"])
+
+    def test_runbook_absent(self):
+        self.assertIsNone(rechercher_runbook(evt(message="health check ok"),
+                                             RUNBOOKS))
+
+
 if __name__ == "__main__":
     unittest.main()
