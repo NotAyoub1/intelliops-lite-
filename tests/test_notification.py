@@ -1,6 +1,6 @@
 import unittest
 from src.contrat import Analyse, Evenement
-from src.notification import choisir_canal, demander_validation
+from src.notification import choisir_canal, demander_validation, rediger
 
 
 def exemple(sensible=True, criticite="CRITICAL"):
@@ -37,7 +37,13 @@ class TestNotification(unittest.TestCase):
     def test_validation_non_sensible(self):
         _, a = exemple(sensible=False)
         self.assertTrue(demander_validation(a, "n"))
-
+    def test_rediger(self):
+          e, a = exemple()
+          lignes = rediger(e, a).split("\n")
+          self.assertEqual(len(lignes), 5)
+          self.assertEqual(lignes[0], "[CRITICAL] Service : backend")
+          self.assertEqual(lignes[1], "Incident : OOMKilled restarts=14")
+          self.assertEqual(lignes[4], "Sources : DOCKER")
 
 if __name__ == "__main__":
     unittest.main()
