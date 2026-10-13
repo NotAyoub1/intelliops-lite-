@@ -28,7 +28,24 @@ class TestAnalyse(unittest.TestCase):
     def test_runbook_absent(self):
         self.assertIsNone(rechercher_runbook(evt(message="health check ok"),
                                              RUNBOOKS))
+    def test_classer_redemarrages(self):
+        e = evt("CONTAINER_RESTART", "HIGH", "OOMKilled restarts=14")
+        self.assertEqual(classer(e), "CRITICAL")
 
+    def test_classer_seuil_10(self):
+        e = evt("CONTAINER_RESTART", "HIGH", "OOMKilled restarts=10")
+        self.assertEqual(classer(e), "CRITICAL")
+
+    def test_classer_peu_de_redemarrages(self):
+        e = evt("CONTAINER_RESTART", "HIGH", "OOMKilled restarts=3")
+        self.assertEqual(classer(e), "MEDIUM")
+
+    def test_classer_vulnerabilite_critique(self):
+        e = evt("VULNERABILITY", "CRITICAL", "CVE-2026-1234", source="TRIVY")
+        self.assertEqual(classer(e), "HIGH")
+
+    def test_classer_par_defaut(self):
+        self.assertEqual(classer(evt("LOG", "MEDIUM")), "MEDIUM")
 
 if __name__ == "__main__":
     unittest.main()
