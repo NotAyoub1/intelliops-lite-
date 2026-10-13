@@ -10,26 +10,26 @@ RUNBOOKS = {
 }
 @dataclass
 class Evenement:
-id: str
-timestamp: str
-source: str
-component: str
-environment: str
-event_type: str
-severity: str
-message: str
-status: str = "NEW" # NEW -> ANALYSED -> NOTIFIED
+    id: str
+    timestamp: str
+    source: str
+    component: str
+    environment: str
+    event_type: str
+    severity: str
+    message: str
+    status: str = "NEW" # NEW -> ANALYSED -> NOTIFIED
 @dataclass
 class Analyse:
-event_id: str
-criticite: str
-cause_probable: str
-action_recommandee: str
-sensible: bool
-sources: list
+    event_id: str
+    criticite: str
+    cause_probable: str
+    action_recommandee: str
+    sensible: bool
+    sources: list
 @dataclass
 class Notification:
-event_id: str
-canal: str
-destinataire: str
-message: str
+    event_id: str
+    canal: str
+    destinataire: str
+    message: str
