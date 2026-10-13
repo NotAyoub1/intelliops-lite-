@@ -12,4 +12,6 @@ def rediger(evt: Evenement, analyse: Analyse) -> str:
 def notifier(evt: Evenement, analyse: Analyse, journal: list) -> Notification:
     raise NotImplementedError
 def demander_validation(analyse: Analyse, reponse: str) -> bool:
-    raise NotImplementedError
+    if not analyse.sensible:
+        return True
+    return reponse.strip().lower() in {"o", "oui", "y", "yes"}
