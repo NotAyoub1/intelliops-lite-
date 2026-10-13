@@ -24,4 +24,14 @@ def classer(evt: Evenement) -> str:
         return "HIGH"
     return evt.severity
 def analyser(evt: Evenement, base: dict) -> Analyse:
-    raise NotImplementedError
+    criticite = classer(evt)
+    cause = rechercher_runbook(evt, base) or "Cause inconnue : analyse manuelle requise"
+    if evt.event_type == "CONTAINER_RESTART":
+        action = f"Redémarrer {evt.component}"
+    elif evt.event_type == "VULNERABILITY":
+        action = "Mettre à jour la dépendance"
+    else:
+        action = "Consulter les logs"
+    evt.status = "ANALYSED"
+    return Analyse(evt.id, criticite, cause, action,
+                   criticite in ("HIGH", "CRITICAL"), [evt.source])
