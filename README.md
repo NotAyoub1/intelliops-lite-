@@ -3,6 +3,7 @@ Groupe : 1
 Mini-plateforme de traitement d'incidents : trois agents (Extraction, Analyse,
 Notification) qui échangent via un contrat commun (src/contrat.py).
 ## Équipe
+-EL FALAKI ASSAAD : agent 2 de filtrage et analyse (B)
 intelliops-lite/
 ├── README.md
 ├── .gitignore
