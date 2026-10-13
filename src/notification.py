@@ -1,6 +1,12 @@
 from src.contrat import Analyse, Evenement, Notification
 def choisir_canal(criticite: str) -> str:
-    raise NotImplementedError
+    if criticite in ("CRITICAL", "HIGH"):
+        return "TEAMS"
+    if criticite == "MEDIUM":
+        return "EMAIL"
+    if criticite == "LOW":
+        return "DASHBOARD"
+    raise ValueError(f"Criticité inconnue : {criticite}")
 def rediger(evt: Evenement, analyse: Analyse) -> str:
     raise NotImplementedError
 def notifier(evt: Evenement, analyse: Analyse, journal: list) -> Notification:
